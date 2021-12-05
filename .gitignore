@@ -30,3 +30,11 @@
 *.exe
 *.out
 *.app
+
+# CodeBlocks
+*.depend
+*.layout
+
+# Other
+Maze/bin/*
+Maze/obj/*
