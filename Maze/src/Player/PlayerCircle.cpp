@@ -3,8 +3,9 @@
 PlayerCircle::PlayerCircle()
     :Player()
 {
+    color = sf::Color(255,0,0);
     player = std::make_shared<sf::CircleShape>(size/2);
-    player->setFillColor(sf::Color::Red);
+    player->setFillColor(color);
     player->move(63,63);
 }
 
@@ -15,33 +16,21 @@ PlayerCircle::~PlayerCircle()
 
 void PlayerCircle::Move()
 {
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
     {
         player->move(0, -speed);
-        vertical_move = true;
     }
-    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
     {
         player->move(0, speed);
-        vertical_move = true;
-    }
-    else
-    {
-        vertical_move = false;
     }
 
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
     {
         player->move(-speed, 0);
-        horizontal_move = true;
     }
-    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
     {
         player->move(speed, 0);
-        horizontal_move = true;
-    }
-    else
-    {
-        horizontal_move = false;
     }
 }

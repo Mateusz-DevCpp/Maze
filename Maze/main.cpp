@@ -9,17 +9,18 @@
 #include "Collision.h"
 #include "Coin.h"
 #include "Camera.h"
+#include "Score.h"
 
 int main()
 {
-    sf::VideoMode view_mode;
-    view_mode.width = 1600;
-    view_mode.height = 800;
+    sf::VideoMode video_mode;
+    video_mode.width = 800;
+    video_mode.height = 800;
 
-    sf::RenderWindow window(view_mode, "Labirynt");
+    sf::RenderWindow window(video_mode, "Labirynt");
     window.setFramerateLimit(120);
 
-    Camera camera(view_mode);
+    Camera camera(video_mode);
 
     std::shared_ptr<Player> player[2];
     player[0] = std::make_shared<PlayerSquare>();
@@ -38,6 +39,8 @@ int main()
     Coin coin;
     spawn = map.GetRandomPoint();
     coin.SetPosition(spawn.x, spawn.y);
+
+    Score score(video_mode);
 
     while(window.isOpen())
     {
@@ -65,24 +68,20 @@ int main()
             Collision::RectangleSeparation(map, *player[i]);
             if(coin.PickUp(*player[i]))
             {
-                player[i]->IncreaseScore();
+                score.IncrementScore(i);
                 map_list_iterator++;
                 if(map_list_iterator == 3)
                 {
                     map_list_iterator = 0;
-                    std::cout << player[0]->GetScore() << " : " << player[1]->GetScore() << std::endl;
-                    player[0]->ResetScore();
-                    player[1]->ResetScore();
+                    //std::cout << "Player " << score.WhoWin() + 1 << " win!!!" << std::endl;
+                    score.Reset();
                 }
-                if(i == 0)
-                    window.clear(sf::Color::Blue);
-                else
-                    window.clear(sf::Color::Red);
+
+                window.clear(player[i]->GetColor());
                 window.display();
-
                 std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-
                 map.Clear();
+
                 map.LoadMap(map_list[map_list_iterator]);
                 sf::Vector2f spawn = map.GetRandomPoint();
                 player[0]->SetPosition(spawn.x, spawn.y);
@@ -94,10 +93,11 @@ int main()
         }
 
         camera.Update(player[0]->GetPosition(), player[1]->GetPosition());
+        score.UpdatePosition(player[0]->GetPosition(), player[1]->GetPosition());
 
 
 
-        window.clear();
+        window.clear(sf::Color(100,100,100));
         for(unsigned short int i=0; i<2; i++)
         {
             camera.SetCamera(window, i);
@@ -105,6 +105,11 @@ int main()
             for(unsigned short int j=0; j<2; j++)
                 player[j]->Draw(window);
             coin.Draw(window);
+            score.Draw(window, i);
+            if(i == 0)
+            {
+                camera.DrawSeparator(window);
+            }
         }
         window.display();
     }

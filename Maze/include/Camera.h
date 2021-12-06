@@ -6,8 +6,10 @@
 class Camera
 {
 private:
-    sf::View player_1_view; //!< View for left side of split screen
-    sf::View player_2_view; //!< View for right side of split screen
+    sf::View player_view[2]; //!< Views for split screen
+
+    sf::VideoMode video_mode; //!< Game window size
+    sf::RectangleShape screen_separator; //!< Black vertical line separate left and right part of split screen
 
 public:
     /** \brief Constructor for Camera class
@@ -31,6 +33,11 @@ public:
      *              1 - right side
      */
     void SetCamera(sf::RenderWindow &window, int split_screen_id);
+
+    /** \brief Draw vertical line between left and right view
+     * \param window - Window to render separator
+     */
+    void DrawSeparator(sf::RenderWindow &window);
 };
 
 #endif // __CAMERA_H__

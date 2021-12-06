@@ -11,10 +11,7 @@ protected:
     std::shared_ptr<sf::Shape> player; //!< A shape whose representing the player
     float size; //!< Player size
     float speed; //!< Player speed (px per frame)
-    bool horizontal_move; //!< Information about actually movement
-    bool vertical_move; //!< Information about actually movement
-
-    unsigned short int score; //!< Amount of collected coins
+    sf::Color color; //!< Color of shape representing player
 
 public:
     /** \brief Default constructor */
@@ -41,16 +38,6 @@ public:
     /** \brief Player movement */
     virtual void Move()=0;
 
-    /** \brief Player movement
-     *  \return If player actually move left or right, return true
-     */
-    bool IsHorizontalMove();
-
-    /** \brief Player movement
-     *  \return If player actually move up or down, return true
-     */
-    bool IsVerticalMove();
-
     /** \brief Improve player position
      * \param x - New horizontal position
      * \param y - New vertical position
@@ -64,20 +51,10 @@ public:
      */
     void ImprovePosition(float x, float y);
 
-    /** \brief Access score
-     * \return amount of collected coins
+    /** \brief Information about player color
+     * \return color in sf::Color of player
      */
-    unsigned short int GetScore();
-
-    /** \brief Access score
-     *          Increase amount of collected coins
-     */
-    void IncreaseScore();
-
-    /** \brief Access score
-     *          Set amount of collected coins to 0
-     */
-    void ResetScore();
+    sf::Color GetColor();
 };
 
 #include "PlayerCircle.h"

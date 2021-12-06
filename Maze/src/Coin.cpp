@@ -2,8 +2,9 @@
 
 Coin::Coin()
 {
+    size = 20;
     coin.setFillColor(sf::Color::Yellow);
-    coin.setSize(sf::Vector2f(20,20));
+    coin.setSize(sf::Vector2f(size, size));
 }
 
 Coin::~Coin()
@@ -29,4 +30,5 @@ bool Coin::PickUp(Player& player)
 void Coin::SetPosition(float x, float y)
 {
     coin.setPosition(x, y);
+    coin.move(size*0.5, size*0.5);
 }

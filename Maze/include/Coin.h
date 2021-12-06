@@ -9,7 +9,8 @@
 class Coin
 {
 private:
-    sf::RectangleShape coin;
+    sf::RectangleShape coin; //!< A shape whose representing the coin
+    float size; //!< Size of coin
 
 public:
     /** Default constructor */

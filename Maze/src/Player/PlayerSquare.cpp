@@ -3,8 +3,9 @@
 PlayerSquare::PlayerSquare()
     :Player()
 {
+    color = sf::Color(0,0,255);
     player = std::make_shared<sf::RectangleShape>(sf::Vector2f(size, size));
-    player->setFillColor(sf::Color::Blue);
+    player->setFillColor(color);
     player->move(63,63);
 }
 
@@ -15,33 +16,21 @@ PlayerSquare::~PlayerSquare()
 
 void PlayerSquare::Move()
 {
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
     {
         player->move(0, -speed);
-        vertical_move = true;
     }
-    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
     {
         player->move(0, speed);
-        vertical_move = true;
-    }
-    else
-    {
-        vertical_move = false;
     }
 
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
     {
         player->move(-speed, 0);
-        horizontal_move = true;
     }
-    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
     {
         player->move(speed, 0);
-        horizontal_move = true;
-    }
-    else
-    {
-        horizontal_move = false;
     }
 }
