@@ -36,6 +36,8 @@
 *.layout
 
 # Other
-Maze/bin/*
-Maze/obj/*
-Maze/doxygen*
+bin/*
+obj/*
+doxygen/*
+build/*
+thirdpart/SFML
