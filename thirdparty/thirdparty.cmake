@@ -5,7 +5,7 @@ if((NOT SFML_LIBRARY) OR (NOT SFML_INCLUDE_DIR))
 	set(SFML_DIR "${THIRDPARTY_DIR}/SFML")
 
 	message("Unable to find SFML, cloning...")
-    execute_process(COMMAND git submodule update --init ${SFML_DIR}
+    execute_process(COMMAND git clone https://github.com/SFML/SFML.git ${SFML_DIR}
                     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 
     add_subdirectory("${SFML_DIR}")
