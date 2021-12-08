@@ -48,6 +48,7 @@
 		<Unit filename="include/Coin.h" />
 		<Unit filename="include/Collision.h" />
 		<Unit filename="include/Map.h" />
+		<Unit filename="include/Navigation.h" />
 		<Unit filename="include/Player/Player.h" />
 		<Unit filename="include/Player/PlayerCircle.h" />
 		<Unit filename="include/Player/PlayerSquare.h" />
@@ -57,6 +58,7 @@
 		<Unit filename="src/Coin.cpp" />
 		<Unit filename="src/Collision.cpp" />
 		<Unit filename="src/Map.cpp" />
+		<Unit filename="src/Navigation.cpp" />
 		<Unit filename="src/Player/Player.cpp" />
 		<Unit filename="src/Player/PlayerCircle.cpp" />
 		<Unit filename="src/Player/PlayerSquare.cpp" />

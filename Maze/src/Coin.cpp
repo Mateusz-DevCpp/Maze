@@ -32,3 +32,8 @@ void Coin::SetPosition(float x, float y)
     coin.setPosition(x, y);
     coin.move(size*0.5, size*0.5);
 }
+
+sf::Vector2f Coin::GetPosition()
+{
+    return coin.getPosition();
+}

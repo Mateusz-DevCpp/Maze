@@ -8,17 +8,21 @@
 class Score
 {
 private:
-    unsigned short int player_score[2]; //!< Amount of collected coins by player
+    unsigned short int player_score_round[2]; //!< Amount of collected coins by player
+    unsigned short int player_score_math[2]; //!< Amount of collected coins by player
 
     sf::Text score_ui[2]; //!< Text with score to display
     sf::Font font; //!< Font used by Score::score_ui
 
     sf::VideoMode video_mode; //!< Size of window, is used to set position for score
 public:
-    /** Default constructor */
+    /** Default constructor
+     * \param video_mode - Information about size of window
+     */
     Score(sf::VideoMode video_mode);
 
-    /** Default destructor */
+    /** Default destructor
+     */
     ~Score();
 
     /** \brief Reset score for both player to value 0

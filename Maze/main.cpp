@@ -9,15 +9,19 @@
 #include "Collision.h"
 #include "Coin.h"
 #include "Camera.h"
+#include "Navigation.h"
 #include "Score.h"
 
 int main()
 {
     sf::VideoMode video_mode;
-    video_mode.width = 800;
+    video_mode.width = 1000;
     video_mode.height = 800;
 
-    sf::RenderWindow window(video_mode, "Labirynt");
+    sf::ContextSettings settings;
+    settings.antialiasingLevel = 8;
+
+    sf::RenderWindow window(video_mode, "Labirynt", sf::Style::Default, settings);
     window.setFramerateLimit(120);
 
     Camera camera(video_mode);
@@ -41,6 +45,7 @@ int main()
     coin.SetPosition(spawn.x, spawn.y);
 
     Score score(video_mode);
+    Navigation nav(video_mode);
 
     while(window.isOpen())
     {
@@ -65,7 +70,11 @@ int main()
         for(unsigned short int i=0; i<2; i++)
         {
             player[i]->Move();
-            Collision::RectangleSeparation(map, *player[i]);
+            if(i==0)
+                Collision::RectangleSeparation(map, *player[i]);
+            else
+                Collision::CircleSeparation(map, *player[i]);
+
             if(coin.PickUp(*player[i]))
             {
                 score.IncrementScore(i);
@@ -73,8 +82,6 @@ int main()
                 if(map_list_iterator == 3)
                 {
                     map_list_iterator = 0;
-                    //std::cout << "Player " << score.WhoWin() + 1 << " win!!!" << std::endl;
-                    score.Reset();
                 }
 
                 window.clear(player[i]->GetColor());
@@ -94,6 +101,7 @@ int main()
 
         camera.Update(player[0]->GetPosition(), player[1]->GetPosition());
         score.UpdatePosition(player[0]->GetPosition(), player[1]->GetPosition());
+        nav.UpdateNavigation(player[0]->GetPosition(), player[1]->GetPosition(), coin.GetPosition());
 
 
 
@@ -106,6 +114,7 @@ int main()
                 player[j]->Draw(window);
             coin.Draw(window);
             score.Draw(window, i);
+            nav.Draw(window, i);
             if(i == 0)
             {
                 camera.DrawSeparator(window);

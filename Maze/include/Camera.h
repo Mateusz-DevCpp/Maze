@@ -17,7 +17,8 @@ public:
      */
     Camera(const sf::VideoMode& video_mode);
 
-    /** Default destructor */
+    /** Default destructor
+     */
     ~Camera();
 
     /** \brief Update view for both side of the split screen

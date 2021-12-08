@@ -16,21 +16,40 @@ PlayerCircle::~PlayerCircle()
 
 void PlayerCircle::Move()
 {
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+    if(use_joystic)
     {
-        player->move(0, -speed);
+        JoystickMove();
     }
-    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+    else
     {
-        player->move(0, speed);
-    }
+        if(!sf::Keyboard::isKeyPressed(sf::Keyboard::Up) &&
+                !sf::Keyboard::isKeyPressed(sf::Keyboard::Down) &&
+                !sf::Keyboard::isKeyPressed(sf::Keyboard::Left) &&
+                !sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+        {
+            speed = 0;
+        }
+        else
+        {
+            speed = max_speed * (1 - smooth) + speed * smooth;
+        }
 
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-    {
-        player->move(-speed, 0);
-    }
-    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-    {
-        player->move(speed, 0);
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+        {
+            player->move(0, -speed);
+        }
+        else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+        {
+            player->move(0, speed);
+        }
+
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+        {
+            player->move(-speed, 0);
+        }
+        else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+        {
+            player->move(speed, 0);
+        }
     }
 }

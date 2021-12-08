@@ -1,6 +1,7 @@
 #ifndef __PLAYER_H__
 #define __PLAYER_H__
 
+#include <iostream>
 #include <memory>
 
 #include <SFML/Graphics.hpp>
@@ -10,14 +11,25 @@ class Player
 protected:
     std::shared_ptr<sf::Shape> player; //!< A shape whose representing the player
     float size; //!< Player size
-    float speed; //!< Player speed (px per frame)
+    float max_speed; //!< Max speed of the player (px per frame)
+    float smooth; //!< Acceleration smoothing degree (in range (0;1))
+    float speed; //!< Current speed of the player (px per frame)
     sf::Color color; //!< Color of shape representing player
 
+    bool use_joystic; //!< If this is true, you can control player using joystick
+
+protected:
+    /** \brief Player movement using joystick
+     */
+    void JoystickMove();
+
 public:
-    /** \brief Default constructor */
+    /** \brief Default constructor
+     */
     Player();
 
-    /** \brief Default destructor */
+    /** \brief Default destructor
+     */
     virtual ~Player();
 
     /** \brief Access size
@@ -35,7 +47,8 @@ public:
      */
     void Draw(sf::RenderWindow& window);
 
-    /** \brief Player movement */
+    /** \brief Player movement
+    */
     virtual void Move()=0;
 
     /** \brief Improve player position
@@ -55,6 +68,12 @@ public:
      * \return color in sf::Color of player
      */
     sf::Color GetColor();
+
+    /** \brief Set controller to player move
+     * \param type - Enable joystick
+     *          if is true use joystick to control player, else use keyboard
+     */
+    void UseJoystick(bool joystick);
 };
 
 #include "PlayerCircle.h"

@@ -46,10 +46,12 @@ private:
     bool GenerateBlocks();
 
 public:
-    /** \brief Default constructor */
+    /** \brief Default constructor
+     */
     Map();
 
-    /** \brief Default destructor */
+    /** \brief Default destructor
+     */
     ~Map();
 
     /** \brief Load map from file
@@ -74,7 +76,7 @@ public:
      * \param x - Horizontal block offset
      * \param y - Vertical block offset
      * \return Pointer to selected block
-     *              if selected block is valid return nullptr
+     *              if selected block is incorrect return nullptr
      */
     std::shared_ptr<sf::RectangleShape> GetBlock(unsigned int x, unsigned int y);
 
@@ -82,7 +84,7 @@ public:
      * \param x - Horizontal field offset
      * \param y - Vertical field offset
      * \return Value of selected field
-     *              if selected field is valid return -1
+     *              if selected field is incorrect return -1
      */
     short int GetMeshField(unsigned int x, unsigned int y);
 

@@ -13,10 +13,12 @@ private:
     float size; //!< Size of coin
 
 public:
-    /** Default constructor */
+    /** Default constructor
+     */
     Coin();
 
-    /** Default destructor */
+    /** Default destructor
+     */
     ~Coin();
 
     /** \brief Draw coin
@@ -29,6 +31,12 @@ public:
      * \param y - New vertical position
      */
     void SetPosition(float x, float y);
+
+    /** \brief Get coin position
+     * \return sf::Vector2f::x - Horizontal position
+     *         sf::Vector2f::y - Vertical position
+     */
+    sf::Vector2f GetPosition();
 
     /** \brief Pick up coin if player is near to coin
      * \param player - The player for whom the attempt to pick up the coin will be made

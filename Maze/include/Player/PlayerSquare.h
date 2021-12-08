@@ -8,15 +8,17 @@ class PlayerSquare : public Player
 {
 private:
 
-
 public:
-    /** \brief Default constructor */
+    /** \brief Default constructor
+     */
     PlayerSquare();
 
-    /** \brief Default destructor */
+    /** \brief Default destructor
+     */
     ~PlayerSquare();
 
-    /** \brief Player movement */
+    /** \brief Player movement
+     */
     void Move() override;
 };
 
